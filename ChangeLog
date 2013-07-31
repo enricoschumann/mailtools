@@ -1,0 +1,6 @@
+2013-07-31  Enrico Schumann  <es@enricoschumann.net>
+
+	* DESCRIPTION (Version): Version: 0.1-0
+
+	* R/saveAttachment.R (saveAttachment): initial version
+

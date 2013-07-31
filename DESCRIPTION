@@ -1,0 +1,10 @@
+Package: mailtools
+Type: Package
+Title: E-Mail Utilities
+Description:  Utilities to handle email.
+Version: 0.1-0
+Date: 2013-07-31
+Depends: base64enc
+Author: Enrico Schumann
+Maintainer: Enrico Schumann <es@enricoschumann.net>
+License: GPL-3
