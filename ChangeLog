@@ -1,3 +1,14 @@
+2013-08-05  Enrico Schumann  <es@enricoschumann.net>
+
+	* DESCRIPTION (Version): Version: 0.1-1
+
+	* R/sendmail.R (sendmail): added header argument
+
+2013-07-31  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): added -- currently only with
+	'sendemail' support
+
 2013-07-31  Enrico Schumann  <es@enricoschumann.net>
 
 	* DESCRIPTION (Version): Version: 0.1-0

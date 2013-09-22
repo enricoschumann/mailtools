@@ -1,1 +1,1 @@
-export(saveAttachment)
+export(saveAttachment,sendmail)
