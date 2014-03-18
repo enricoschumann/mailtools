@@ -54,5 +54,26 @@ sendmail <- function(subject,
         system(str)        
     }
 
+    if (method == "blat") {
+        str <- paste0("sendemail -f ", shQuote(from),
+                      if (!is.null(to))  paste0(" -t ", to) else "",
+                      if (!is.null(cc))  paste0(" -cc ", cc) else "",
+                      if (!is.null(bcc)) paste0(" -bcc ", bcc) else "",
+                      if (!is.null(replyto)) paste0(" -o reply-to=", replyto) else "",
+                      if (!is.null(logfile)) paste0(" -l ", logfile) else "",
+                      " -u ", shQuote(subject),
+                      " -m ", shQuote(body),
+                      " -xu ", user,
+                      " -xp ", password,
+                      " -s ", paste0(server, ":", port),
+                      " -o message-charset=utf-8")
+        
+        if (!is.null(attach))
+            str <- paste0(str, " -a ", paste(attach, collapse = " "))
+        if (!is.null(headers))
+            str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
+        system(str)        
+    }
+
 
 }
