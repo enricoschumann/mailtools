@@ -42,8 +42,8 @@ sendmail <- function(subject,
                       if (!is.null(logfile)) paste0(" -l ", logfile) else "",
                       " -u ", shQuote(subject),
                       " -m ", shQuote(body),
-                      " -xu ", user,
-                      " -xp ", password,
+                      " -xu ", shQuote(user),
+                      " -xp ", shQuote(password),
                       " -s ", paste0(server, ":", port),
                       " -o message-charset=utf-8")
         

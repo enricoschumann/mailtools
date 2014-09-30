@@ -1,3 +1,8 @@
+2014-09-30  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): quote username to allow special
+	characters
+
 2013-11-01  Enrico Schumann  <es@enricoschumann.net>
 
 	* DESCRIPTION (Version): Version: 0.1-2
