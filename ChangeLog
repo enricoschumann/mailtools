@@ -1,6 +1,7 @@
 2014-10-01  Enrico Schumann  <es@enricoschumann.net>
 
 	* DESCRIPTION (Version): Version: 0.1-3
+	(Imports): base64enc (no more Depends)
 
 	* R/sendmail.R (sendmail): quote username to allow special
 	characters
