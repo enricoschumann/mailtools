@@ -18,15 +18,15 @@ saveAttachment <- function(pattern, fname, writeIfExists = TRUE, adjustfn = TRUE
         message("Saving file ", atts[il])
 
         lb <- 7L ## look back
-        lf <- 5L ## look forward
+        lf <- 10L ## look forward
         checkLines <- (iline - lb):(iline + lf)
         checkLines <- checkLines[checkLines < length(mbox) &
                                  checkLines > 0L]
         ## TODO: update lf and lb when at start or end of mbox file
         f7delim <- max(grep("^--", mbox[checkLines]))
         delim <- mbox[iline-lb-1L+f7delim]
-        f7enc <- grep("Content-Transfer-Encoding", mbox[checkLines],
-                      ignore.case = TRUE)
+        f7enc <- max(grep("Content-Transfer-Encoding", mbox[checkLines],
+                      ignore.case = TRUE))
 
         do.decode <- TRUE
         if (!grepl("base64", mbox[iline-lb-1L+f7enc], ignore.case = TRUE)) {
