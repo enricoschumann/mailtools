@@ -33,6 +33,13 @@ sendmail <- function(subject,
         method <- c(unix    = "sendemail",
                     windows = "blat")[.Platform$OS.type]
     
+    if (length(to) > 1L)
+        to <- paste0(to, collapse = ",")
+    if (length(cc) > 1L)
+        cc <- paste0(cc, collapse = ",")
+    if (length(bcc) > 1L)
+        bcc <- paste0(bcc, collapse = ",")
+    
     if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",

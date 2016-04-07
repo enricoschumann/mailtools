@@ -77,7 +77,12 @@ sendmail(subject, body, body.file = NULL, to, from,
 }
 }
 \details{
- To be added.
+
+  The function constructs an invocation of a command-line utility,
+  specified by \code{method}, and then calls the specified method via
+  \code{system}. Currently supported are sendemail (default for
+  Unix-like systems) and Blat.
+  
 }
 \value{
   return value of \code{system}
@@ -88,7 +93,7 @@ sendmail(subject, body, body.file = NULL, to, from,
 \author{
   Enrico Schumann
 }
-\section{Important }{
+\section{Important}{
   The function uses command-line tools.
 }
 \seealso{
