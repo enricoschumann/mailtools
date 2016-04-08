@@ -79,8 +79,7 @@ sendmail <- function(subject,
             str <- paste0(str, " -a ", paste(attach, collapse = " "))
         if (!is.null(headers))
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
+        ## TODO use system2
         system(str)        
     }
-
-
 }
