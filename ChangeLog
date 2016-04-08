@@ -1,4 +1,6 @@
-2016-04-07  Enrico Schumann  <es@enricoschumann.net>
+2016-04-08  Enrico Schumann  <es@enricoschumann.net>
+
+        * DESCRIPTION (Version): 0.1-5
 
 	* R/sendmail.R (sendmail): if 'to', 'cc' and 'bcc'
 	are character vectors of length > 1, they are now
