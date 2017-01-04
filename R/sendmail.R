@@ -24,6 +24,9 @@ sendmail <- function(subject,
 
     if (is.null(body))
         body <- "\n"
+    else if (length(body) > 1L) {
+        body <- paste0(body, collapse = "\n")
+    }
     ## if (inherits(body, "connection")) {
     ##     bdy <- paste0(" -o message-file=", summary(body)[["description"]])
     ## } else
@@ -34,11 +37,11 @@ sendmail <- function(subject,
                     windows = "blat")[.Platform$OS.type]
     
     if (length(to) > 1L)
-        to <- paste0(to, collapse = ",")
+        to <- paste0(shQuote(to), collapse = ",")
     if (length(cc) > 1L)
-        cc <- paste0(cc, collapse = ",")
+        cc <- paste0(shQuote(cc), collapse = ",")
     if (length(bcc) > 1L)
-        bcc <- paste0(bcc, collapse = ",")
+        bcc <- paste0(shQuote(bcc), collapse = ",")
     
     if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),

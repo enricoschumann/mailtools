@@ -19,7 +19,8 @@ sendmail(subject, body, body.file = NULL, to, from,
     character
 }
   \item{body}{
-    character
+    character. When of length > 1, then all elements are
+    pasted together, separated by newline characters
 }
   \item{body.file}{
     character. If specified, \code{body} is ignored.
