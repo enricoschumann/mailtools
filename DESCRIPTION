@@ -8,3 +8,6 @@ Imports: base64enc
 Author: Enrico Schumann
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 License: GPL-3
+SystemRequirements: A backend for actually sending the
+    e-mail: for instance, 'sendemail' on Debian/Ubuntu
+    or 'Blat' on Windows.

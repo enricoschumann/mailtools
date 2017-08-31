@@ -17,7 +17,7 @@ sendmail <- function(subject,
                      encoding = "unknown",
                      method = "default") {
     
-    ## methods: blat, sendemail
+    ## methods: blat, sendemail, outlook
     if (!is.null(body.file))
         body <- paste(readLines(body.file, encoding = encoding),
                       collapse = "\n")
@@ -27,6 +27,13 @@ sendmail <- function(subject,
     else if (length(body) > 1L) {
         body <- paste0(body, collapse = "\n")
     }
+    if (length(to) > 1L)
+        to <- paste0(shQuote(to), collapse = ",")
+    if (length(cc) > 1L)
+        cc <- paste0(shQuote(cc), collapse = ",")
+    if (length(bcc) > 1L)
+        bcc <- paste0(shQuote(bcc), collapse = ",")
+
     ## if (inherits(body, "connection")) {
     ##     bdy <- paste0(" -o message-file=", summary(body)[["description"]])
     ## } else
@@ -36,12 +43,6 @@ sendmail <- function(subject,
         method <- c(unix    = "sendemail",
                     windows = "blat")[.Platform$OS.type]
     
-    if (length(to) > 1L)
-        to <- paste0(shQuote(to), collapse = ",")
-    if (length(cc) > 1L)
-        cc <- paste0(shQuote(cc), collapse = ",")
-    if (length(bcc) > 1L)
-        bcc <- paste0(shQuote(bcc), collapse = ",")
     
     if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),
