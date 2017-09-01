@@ -1,2 +1,6 @@
-export(saveAttachment,sendmail)
-importFrom(base64enc, base64decode)
+export("saveAttachment",
+       "sendmail")
+
+importFrom("base64enc", "base64decode")
+
+importFrom("stats", "runif")

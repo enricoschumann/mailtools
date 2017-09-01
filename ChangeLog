@@ -1,3 +1,9 @@
+2017-09-01  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): new method
+	'outlook', which uses PowerShell to send
+	messages via a running instance of Outlook
+
 2016-04-21  Enrico Schumann  <es@enricoschumann.net>
 
 	* R/sendmail.R (sendmail): if 'length(body) > 1',

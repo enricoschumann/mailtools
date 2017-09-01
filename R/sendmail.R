@@ -15,7 +15,8 @@ sendmail <- function(subject,
                      wait = TRUE,
                      logfile = NULL,
                      encoding = "unknown",
-                     method = "default") {
+                     method = "default",
+                     display.only = FALSE) {
     
     ## methods: blat, sendemail, outlook
     if (!is.null(body.file))
@@ -63,9 +64,7 @@ sendmail <- function(subject,
         if (!is.null(headers))
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
         system(str)        
-    }
-
-    if (method == "blat") {
+    } else if (method == "blat") {
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",
                       if (!is.null(cc))  paste0(" -cc ", cc) else "",
@@ -85,5 +84,40 @@ sendmail <- function(subject,
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
         ## TODO use system2
         system(str)        
-    }
+    } else if (method == "outlook") {
+        
+        cmd <- c("$o = New-Object -com Outlook.Application",
+                 "$mail = $o.CreateItem(0)")
+        cmd <- c(cmd,
+                 paste("$mail.subject =", sQuote(subject)))
+        if (!missing(to))
+            cmd <- c(cmd,
+                     paste("$mail.to =", sQuote(to)))
+        if (!is.null(cc))
+            cmd <- c(cmd,
+                     paste("$mail.cc =", sQuote(to)))
+        if (!is.null(bcc))
+            cmd <- c(cmd,
+                     paste("$mail.bcc =", sQuote(to)))
+        if (!is.null(attach)) {
+            for (a in attach)
+                cmd <- if (file.exists(a))
+                           c(cmd,
+                             paste0("$mail.attachments.add(", sQuote(normalizePath(a)),")"))
+                       else
+                           stop("cannot find attachment ", sQuote(a))
+        }
+        cmd <- c(cmd,
+                 paste("$mail.body =", sQuote(body)))
+        if (display.only)
+            cmd <- c(cmd, "$mail.display()")
+        else
+            cmd <- c(cmd, "$mail.send()")
+        
+        cmd <- paste(cmd, collapse = ";")
+        system(paste("powershell -command ", shQuote(cmd)))
+        
+
+    } else
+        stop("unknown method")
 }
