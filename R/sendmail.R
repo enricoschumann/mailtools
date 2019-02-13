@@ -1,3 +1,5 @@
+## -*- truncate-lines: t; -*-
+
 sendmail <- function(subject,
                      body,
                      body.file = NULL,
@@ -44,12 +46,11 @@ sendmail <- function(subject,
         method <- c(unix    = "sendemail",
                     windows = "blat")[.Platform$OS.type]
     
-    
     if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),
-                      if (!is.null(to))  paste0(" -t ", to) else "",
-                      if (!is.null(cc))  paste0(" -cc ", cc) else "",
-                      if (!is.null(bcc)) paste0(" -bcc ", bcc) else "",
+                      if (!is.null(to))  paste0(" -t ", shQuote(to)) else "",
+                      if (!is.null(cc))  paste0(" -cc ", shQuote(cc)) else "",
+                      if (!is.null(bcc)) paste0(" -bcc ", shQuote(bcc)) else "",
                       if (!is.null(replyto)) paste0(" -o reply-to=", replyto) else "",
                       if (!is.null(logfile)) paste0(" -l ", logfile) else "",
                       " -u ", shQuote(subject),

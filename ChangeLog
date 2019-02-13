@@ -1,3 +1,11 @@
+2019-02-13  Enrico Schumann  <es@enricoschumann.net>
+
+	* DESCRIPTION (Version): 0.1-6
+
+	* R/sendmail.R (sendmail): quote email
+	addresses, so that expressions like
+	"name <name@server.net>" can be used
+
 2018-02-27  Enrico Schumann  <es@enricoschumann.net>
 
 	* NAMESPACE: export msgID
