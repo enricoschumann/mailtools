@@ -2,8 +2,8 @@ Package: mailtools
 Type: Package
 Title: E-Mail Utilities
 Description:  Utilities to handle email.
-Version: 0.1-6
-Date: 2019-02-13
+Version: 0.1-7
+Date: 2019-03-27
 Imports: base64enc
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 Authors@R: person(given = "Enrico", family = "Schumann", 
@@ -13,4 +13,5 @@ Authors@R: person(given = "Enrico", family = "Schumann",
 License: GPL-3
 SystemRequirements: A backend for actually sending the
     e-mail: for instance, 'sendemail' on Debian/Ubuntu,
-    or 'Blat' on Windows.
+    or 'Blat' or 'Outlook' on Windows (see ?sendmail for
+    details).

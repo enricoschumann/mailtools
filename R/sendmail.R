@@ -17,7 +17,7 @@ sendmail <- function(subject,
                      wait = TRUE,
                      logfile = NULL,
                      encoding = "unknown",
-                     method = "default",
+                     method = NULL,
                      display.only = FALSE,
                      html = FALSE) {
     
@@ -43,11 +43,12 @@ sendmail <- function(subject,
     ## } else
     ##     bdy <- paste0(" -m ", sQuote(paste0(body, collapse = "\n")))
 
-    if (method == "default") 
-        method <- c(unix    = "sendemail",
-                    windows = "blat")[.Platform$OS.type]
-    
-    if (method == "sendemail") {
+    if (is.null(method)) {
+        if (method == "default") 
+            method <- c(unix    = "sendemail",
+                        windows = "blat")[.Platform$OS.type]
+        
+    } else if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", shQuote(to)) else "",
                       if (!is.null(cc))  paste0(" -cc ", shQuote(cc)) else "",

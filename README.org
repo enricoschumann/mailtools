@@ -1,0 +1,88 @@
+#+TITLE: mailtools
+#+AUTHOR: Enrico Schumann
+
+* Usage: Sending Emails
+
+A typical call may look as follows.
+
+#+BEGIN_SRC R :eval never
+  library("mailtools")
+  sendmail(subject  = "Greetings",
+	   body     = "Hello",
+	   to       = "testing@testing.org",
+	   from     = "<your.email-adress@your-server.net>",
+	   port     = 123,
+	   server   = "my-magic-server.net",
+	   user     = "username",
+	   password = "1234.password",
+	   headers  = "X-GREETINGS-CATEGORY: hello",
+	   method   = c(unix = "sendemail",
+			windows = "blat")[.Platform$OS.type])
+#+END_SRC
+
+On Windows, you may prefer method =outlook= (which
+requires Outlook and PowerShell installed).
+
+#+BEGIN_SRC R :eval never
+  sendmail(subject  = "Greetings",
+	   body     = "Hello",
+	   to       = "testing@testing.org",
+	   method   = "outlook",
+           display.only = TRUE)  ## only open mail in Outlook
+#+END_SRC
+
+Formating message texts is possible via HTML.
+
+#+BEGIN_SRC R :eval never
+  body <- "
+  <p>Hello.</p>
+
+  <p>Please do not send <b>spam</b></p>.
+  "
+
+  sendmail(subject  = "Greetings",
+	   body     = "Hello",
+	   to       = "testing@testing.org",
+	   method   = "outlook",
+	   html     = TRUE,
+	   display.only = TRUE)
+#+END_SRC
+
+(But note that none of the backends will automatically
+ create a text part for your message. In the good old
+ days, a message an HTML part but no text part was
+ often more likely to be flagged as spam. But these
+ days it seems to be the norm. Oh, well. You have been
+ warned, in any case.)
+
+
+* Installation
+
+The latest release of the package is available from
+[[http://enricoschumann.net/R/packages/mailtools]]. You can
+install the package directly from within R:
+#+BEGIN_SRC R :eval never
+  install.packages('mailtools',
+		   repos = c('http://enricoschumann.net/R', 
+			     getOption('repos')))
+#+END_SRC
+
+
+Note that the package itself does provide code for
+actually sending emails. For this, you'll need a
+backend.
+
+On GNU/Linux systems, there is support for =sendemail=.
+On Debian/Ubuntu systems, for instance, it is easily
+installed:
+#+BEGIN_SRC sh :eval never
+  sudo apt install sendemail
+#+END_SRC
+
+On Windows, the preferred backend is Blat.
+Alternatively, provided Powershell is installed (which
+is the default case on newer Windows systems), you may
+use Outlook.
+
+There is also a publicly-available repository at
+https://github.com/enricoschumann/mailtools.

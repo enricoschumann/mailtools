@@ -12,7 +12,8 @@ sendmail(subject, body, body.file = NULL, to, from,
          server, port, user, password,
          attach = NULL, signature = NULL, signature.file = NULL,
          headers = NULL, wait = TRUE, logfile = NULL,
-         encoding = "unknown", method = "default")
+         encoding = "unknown", method = NULL,
+         display.only = FALSE, html = FALSE)
 }
 \arguments{
   \item{subject}{
@@ -76,30 +77,55 @@ sendmail(subject, body, body.file = NULL, to, from,
   \item{method}{
     the programme to be called.
 }
+  \item{display.only}{
+
+    logical: if \code{TRUE}, only display message, but
+    do not send. Works only for method \code{outlook}.
+
+  }
+  \item{html}{
+
+    logical: send as HTML? For method \code{sendemail},
+    if the message body begins with \code{<html>}, it
+    is considered HTML.
+
+}
 }
 \details{
 
-  The function constructs an invocation of a command-line utility,
-  specified by \code{method}, and then calls the specified method via
-  \code{system}. Currently supported are sendemail (default for
-  Unix-like systems) and Blat.
-  
+  The function provides a wrapper for different tools
+  that send emails. In this way, the same \R code that
+  can be used across platforms, provided a suitable
+  backend is installed.
+
+  The function constructs an invocation of a
+  command-line utility, specified by \code{method}, and
+  then calls the specified method via
+  \code{system}. Currently supported are sendemail and
+  Blat.
 }
 \value{
-  return value of \code{system}
+  the return value of \code{system}
 }
 \references{
-  to be added
+  RFC TODO
 }
 \author{
   Enrico Schumann
 }
-\section{Important}{
-  The function uses command-line tools.
-}
-\seealso{
-to be added
-}
 \examples{
-## to be added
+\dontrun{
+body <- "
+<p>Hello.</p>
+
+  <p>Please do not send <b>spam</b></p>.
+"
+
+sendmail(subject  = "Greetings",
+         body     = "Hello",
+         to       = "testing@testing.org",
+         method   = "outlook",
+         html     = TRUE,
+         display.only = TRUE)  ## only open mail in Outlook
+}
 }

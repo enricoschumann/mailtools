@@ -1,3 +1,7 @@
+v0.1-7  (????-??-??; not yet released)
+
+  o sendmail: new arguments 'display.only' and 'html'
+
 v0.1-6  (2019-02-13)
 
   o sendmail: email addresses are now quoted, which

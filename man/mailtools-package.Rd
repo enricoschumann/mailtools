@@ -11,8 +11,8 @@ E-Mail Utilties
 }
 \details{
 
-  The package provides an R interface to several command line tools for
-  sending emails.
+  The package provides an R interface to several
+  command line tools for sending emails.
 
 }
 \author{
@@ -25,9 +25,9 @@ Maintainer: Enrico Schumann <es@enricoschumann.net>
 to be added
 }
 \keyword{ package }
-\seealso{
-to be added
-}
-\examples{
-## to be added
-}
+%% \seealso{
+%% to be added
+%% }
+%% \examples{
+%% ## to be added
+%% }
