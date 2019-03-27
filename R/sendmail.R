@@ -18,7 +18,8 @@ sendmail <- function(subject,
                      logfile = NULL,
                      encoding = "unknown",
                      method = "default",
-                     display.only = FALSE) {
+                     display.only = FALSE,
+                     html = FALSE) {
     
     ## methods: blat, sendemail, outlook
     if (!is.null(body.file))
@@ -109,7 +110,12 @@ sendmail <- function(subject,
                            stop("cannot find attachment ", sQuote(a))
         }
         cmd <- c(cmd,
-                 paste("$mail.body =", sQuote(body)))
+                 paste(if (html) "$mail.HTMLBody =" else "$mail.Body =",
+                       dQuote(body)))
+        if (!html) {
+            cmd <- c(cmd, "$mail.BodyFormat = 2")
+        }
+
         if (display.only)
             cmd <- c(cmd, "$mail.display()")
         else
