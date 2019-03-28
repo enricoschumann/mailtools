@@ -37,12 +37,11 @@ Formating message texts is possible via HTML.
 #+BEGIN_SRC R :eval never
   body <- "
   <p>Hello.</p>
-
-  <p>Please do not send <b>spam</b></p>.
+  <p>Please do not send <b>spam</b>.</p>
   "
 
   sendmail(subject  = "Greetings",
-	   body     = "Hello",
+	   body     = body,
 	   to       = "testing@testing.org",
 	   method   = "outlook",
 	   html     = TRUE,
@@ -59,7 +58,7 @@ Formating message texts is possible via HTML.
 
 * Installation
 
-The latest release of the package is available from
+The latest version of the package is available from
 [[http://enricoschumann.net/R/packages/mailtools]]. You can
 install the package directly from within R:
 #+BEGIN_SRC R :eval never
@@ -73,7 +72,7 @@ Note that the package itself does not provide code for
 actually sending emails. For this, you'll need a
 backend.
 
-On GNU/Linux systems, there is support for [[http://caspian.dotconf.net/menu/Software/SendEmail][=sendemail=]]
+On GNU/Linux systems, there is support for [[http://caspian.dotconf.net/menu/Software/SendEmail][=sendemail=]].
 On Debian/Ubuntu systems, for instance, it is easily
 installed:
 #+BEGIN_SRC sh :eval never
