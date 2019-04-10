@@ -19,7 +19,8 @@ sendmail <- function(subject,
                      encoding = "unknown",
                      method = NULL,
                      display.only = FALSE,
-                     html = FALSE) {
+                     html = FALSE,
+                     SendUsingAccount) {
     
     ## methods: blat, sendemail, outlook
     if (!is.null(body.file))
@@ -117,14 +118,33 @@ sendmail <- function(subject,
             cmd <- c(cmd, "$mail.BodyFormat = 2")
         }
 
+        if (!missing(SendUsingAccount)) {
+            if (method == "outlook") {
+
+                l1 <- paste0("$acc = $o.Session.Accounts | ",
+                             "Where-Object { $_.SmtpAddress -eq ",
+                             shQuote(SendUsingAccount), " }")
+                l2 <- paste0("[Void] $mail.GetType().InvokeMember(",
+                             shQuote("SendUsingAccount"), ",",
+                             shQuote("SetProperty"),
+                             ", $NULL, $mail, $acc)")
+
+            } else
+                warning(sQuote("SendUsingAccount"),
+                        " only works with method ",
+                        sQuote("outlook"))
+            
+        }
+        cmd <- c(cmd, l1, l2)
+        
         if (display.only)
-            cmd <- c(cmd, "$mail.display()")
+            cmd <- c(cmd, "$mail.Display()")
         else
-            cmd <- c(cmd, "$mail.send()")
-        
+            cmd <- c(cmd, "$mail.Send()")
+        cat(cmd, sep = "\n")
         cmd <- paste(cmd, collapse = ";")
-        system(paste("powershell -command ", shQuote(cmd)))
-        
+        res <- system(paste("powershell -command ", shQuote(cmd)), intern = TRUE)
+        invisible(res)
 
     } else
         stop("unknown method")
