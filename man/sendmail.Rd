@@ -13,7 +13,7 @@ sendmail(subject, body, body.file = NULL, to, from,
          attach = NULL, signature = NULL, signature.file = NULL,
          headers = NULL, wait = TRUE, logfile = NULL,
          encoding = "unknown", method = NULL,
-         display.only = FALSE, html = FALSE)
+         display.only = FALSE, html = FALSE, SendUsingAccount)
 }
 \arguments{
   \item{subject}{
@@ -89,7 +89,13 @@ sendmail(subject, body, body.file = NULL, to, from,
     if the message body begins with \code{<html>}, it
     is considered HTML.
 
-}
+  }
+  \item{SendUsingAccount}{
+
+    a character string: an email address.
+    only supported for method \sQuote{\code{outlook}}.
+  }
+
 }
 \details{
 
@@ -101,14 +107,24 @@ sendmail(subject, body, body.file = NULL, to, from,
   The function constructs an invocation of a
   command-line utility, specified by \code{method}, and
   then calls the specified method via
-  \code{system}. Currently supported are sendemail and
-  Blat.
+  \code{system}. Currently supported are \code{sendemail} and
+  \code{Blat} (see References).
+
 }
 \value{
+
   the return value of \code{system}
+
 }
 \references{
-  RFC TODO
+
+  \url{http://caspian.dotconf.net/menu/Software/SendEmail/}
+
+  \url{https://www.blat.net/}
+
+  \acronym{RFC} 2822: Internet Message Format.
+  \url{https://tools.ietf.org/html/rfc2822}
+
 }
 \author{
   Enrico Schumann
