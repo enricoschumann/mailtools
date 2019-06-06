@@ -22,7 +22,6 @@ sendmail <- function(subject,
                      html = FALSE,
                      SendUsingAccount) {
     
-    ## methods: blat, sendemail, outlook
     if (!is.null(body.file))
         body <- paste(readLines(body.file, encoding = encoding),
                       collapse = "\n")
@@ -45,9 +44,8 @@ sendmail <- function(subject,
     ##     bdy <- paste0(" -m ", sQuote(paste0(body, collapse = "\n")))
 
     if (is.null(method)) {
-        if (method == "default") 
-            method <- c(unix    = "sendemail",
-                        windows = "blat")[.Platform$OS.type]
+        method <- c(unix    = "sendemail",
+                    windows = "blat")[.Platform$OS.type]
         
     } else if (method == "sendemail") {
         str <- paste0("sendemail -f ", shQuote(from),
@@ -119,23 +117,15 @@ sendmail <- function(subject,
         }
 
         if (!missing(SendUsingAccount)) {
-            if (method == "outlook") {
-
                 l1 <- paste0("$acc = $o.Session.Accounts | ",
                              "Where-Object { $_.SmtpAddress -eq ",
                              shQuote(SendUsingAccount), " }")
                 l2 <- paste0("[Void] $mail.GetType().InvokeMember(",
                              shQuote("SendUsingAccount"), ",",
                              shQuote("SetProperty"),
-                             ", $NULL, $mail, $acc)")
-
-            } else
-                warning(sQuote("SendUsingAccount"),
-                        " only works with method ",
-                        sQuote("outlook"))
-            
+                             ", $NULL, $mail, $acc)")                
+                cmd <- c(cmd, l1, l2)
         }
-        cmd <- c(cmd, l1, l2)
         
         if (display.only)
             cmd <- c(cmd, "$mail.Display()")

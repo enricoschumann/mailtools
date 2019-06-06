@@ -3,6 +3,9 @@ v0.1-7  (????-??-??; not yet released)
   o sendmail: new arguments 'display.only', 'html' and
     'SendUsingAccount' (the latter a result of
     https://github.com/enricoschumann/mailtools/issues/1
+    and
+    https://github.com/enricoschumann/mailtools/issues/2 ;
+    thanks to 'TobiSonne' for raising these issues)
 
 v0.1-6  (2019-02-13)
 
