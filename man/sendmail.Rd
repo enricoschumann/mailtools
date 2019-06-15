@@ -45,7 +45,7 @@ sendmail(subject, body, body.file = NULL, to, from,
     character
 }
   \item{port}{
-    character
+    character (an integer will automatically be coerced). Typically 587.
 }
   \item{user}{
     character
