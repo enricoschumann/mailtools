@@ -1,3 +1,8 @@
+2019-09-23  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): paste/quote even
+	length-one addresses
+
 2019-06-06  Enrico Schumann  <es@enricoschumann.net>
 
 	* R/sendmail.R (sendmail): fix handling of

@@ -3,7 +3,7 @@ Type: Package
 Title: E-Mail Utilities
 Description:  Utilities to handle email.
 Version: 0.1-7
-Date: 2019-04-14
+Date: 2019-09-23
 Imports: base64enc
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 Authors@R: person(given = "Enrico", family = "Schumann",
