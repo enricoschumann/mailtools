@@ -22,6 +22,9 @@ sendmail <- function(subject,
                      html = FALSE,
                      SendUsingAccount) {
 
+    old <- options(useFancyQuotes = FALSE)
+    on.exit(options(old))
+
     if (!is.null(body.file))
         body <- paste(readLines(body.file, encoding = encoding),
                       collapse = "\n")
@@ -32,9 +35,6 @@ sendmail <- function(subject,
         body <- paste0(body, collapse = "\n")
     }
 
-    to <- paste0(shQuote(to), collapse = ",")
-    cc <- paste0(shQuote(cc), collapse = ",")
-    bcc <- paste0(shQuote(bcc), collapse = ",")
 
     ## if (inherits(body, "connection")) {
     ##     bdy <- paste0(" -o message-file=", summary(body)[["description"]])
@@ -46,6 +46,16 @@ sendmail <- function(subject,
                     windows = "blat")[.Platform$OS.type]
 
     } else if (method == "sendemail") {
+
+        if (!missing(to))
+            to <- paste0(shQuote(to), collapse = ",")
+        if (!is.null(cc))
+            cc <- paste0(shQuote(cc), collapse = ",")
+        if (!is.null(bcc))
+            bcc <- paste0(shQuote(bcc), collapse = ",")
+        if (!is.null(replyto))
+            bcc <- paste0(shQuote(replyto), collapse = ",")
+
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",
                       if (!is.null(cc))  paste0(" -cc ", cc) else "",
@@ -65,6 +75,7 @@ sendmail <- function(subject,
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
         system(str)
     } else if (method == "blat") {
+        ## TODO check handling of multiple recipients
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",
                       if (!is.null(cc))  paste0(" -cc ", cc) else "",
@@ -82,9 +93,18 @@ sendmail <- function(subject,
             str <- paste0(str, " -a ", paste(attach, collapse = " "))
         if (!is.null(headers))
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
-        ## TODO use system2
+        ## TODO use system2?
         system(str)
     } else if (method == "outlook") {
+
+        if (!missing(to))
+            to <- paste0(to, collapse = ";")
+        if (!is.null(cc))
+            cc <- paste0(cc, collapse = ";")
+        if (!is.null(bcc))
+            bcc <- paste0(bcc, collapse = ";")
+        if (!is.null(replyto))
+            bcc <- paste0(replyto, collapse = ";")
 
         cmd <- c("$o = New-Object -com Outlook.Application",
                  "$mail = $o.CreateItem(0)")
@@ -95,10 +115,10 @@ sendmail <- function(subject,
                      paste("$mail.to =", sQuote(to)))
         if (!is.null(cc))
             cmd <- c(cmd,
-                     paste("$mail.cc =", sQuote(to)))
+                     paste("$mail.cc =", sQuote(cc)))
         if (!is.null(bcc))
             cmd <- c(cmd,
-                     paste("$mail.bcc =", sQuote(to)))
+                     paste("$mail.bcc =", sQuote(bcc)))
         if (!is.null(attach)) {
             for (a in attach)
                 cmd <- if (file.exists(a))
@@ -129,10 +149,11 @@ sendmail <- function(subject,
             cmd <- c(cmd, "$mail.Display()")
         else
             cmd <- c(cmd, "$mail.Send()")
-        cat(cmd, sep = "\n")
+        ## cat(cmd, sep = "\n")
         cmd <- paste(cmd, collapse = ";")
-        res <- system(paste("powershell -command ", shQuote(cmd)), intern = TRUE)
-        invisible(res)
+        invisible(system(paste("powershell -command ", shQuote(cmd)),
+                         intern = TRUE))
+
 
     } else
         stop("unknown method")

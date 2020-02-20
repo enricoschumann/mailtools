@@ -1,3 +1,9 @@
+2019-09-27  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): handle recipients
+	differently, depending on method; fix handling
+	of cc/bcc for method 'outlook'
+
 2019-09-23  Enrico Schumann  <es@enricoschumann.net>
 
 	* R/sendmail.R (sendmail): paste/quote even
