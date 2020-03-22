@@ -7,7 +7,7 @@
   Send emails via command line tools.
 }
 \usage{
-sendmail(subject, body, body.file = NULL, to, from,
+sendmail(subject, body, body.file = NULL, to = NULL, from,
          cc = NULL, bcc = NULL, replyto = NULL,
          server, port, user, password,
          attach = NULL, signature = NULL, signature.file = NULL,

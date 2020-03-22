@@ -3,7 +3,7 @@
 sendmail <- function(subject,
                      body,
                      body.file = NULL,
-                     to,
+                     to = NULL,
                      from,
                      cc = NULL,
                      bcc = NULL,
@@ -47,7 +47,7 @@ sendmail <- function(subject,
 
     } else if (method == "sendemail") {
 
-        if (!missing(to))
+        if (!is.null(to))
             to <- paste0(shQuote(to), collapse = ",")
         if (!is.null(cc))
             cc <- paste0(shQuote(cc), collapse = ",")
@@ -97,7 +97,7 @@ sendmail <- function(subject,
         system(str)
     } else if (method == "outlook") {
 
-        if (!missing(to))
+        if (!is.null(to))
             to <- paste0(to, collapse = ";")
         if (!is.null(cc))
             cc <- paste0(cc, collapse = ";")
@@ -110,7 +110,7 @@ sendmail <- function(subject,
                  "$mail = $o.CreateItem(0)")
         cmd <- c(cmd,
                  paste("$mail.subject =", sQuote(subject)))
-        if (!missing(to))
+        if (!is.null(to))
             cmd <- c(cmd,
                      paste("$mail.to =", sQuote(to)))
         if (!is.null(cc))

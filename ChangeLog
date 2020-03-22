@@ -1,3 +1,8 @@
+2020-03-22  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): 'to' now defaults to
+	NULL and may be missing
+
 2019-09-27  Enrico Schumann  <es@enricoschumann.net>
 
 	* R/sendmail.R (sendmail): handle recipients
