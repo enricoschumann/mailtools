@@ -1,104 +1,105 @@
 2020-03-22  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): 'to' now defaults to
-	NULL and may be missing
+        * R/sendmail.R (sendmail): 'to' now defaults to
+        NULL and may be missing
+        (sendmail): fix 'replyto'
 
 2019-09-27  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): handle recipients
-	differently, depending on method; fix handling
-	of cc/bcc for method 'outlook'
+        * R/sendmail.R (sendmail): handle recipients
+        differently, depending on method; fix handling
+        of cc/bcc for method 'outlook'
 
 2019-09-23  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): paste/quote even
-	length-one addresses
+        * R/sendmail.R (sendmail): paste/quote even
+        length-one addresses
 
 2019-06-06  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): fix handling of
-	'SendUsingAccount'
+        * R/sendmail.R (sendmail): fix handling of
+        'SendUsingAccount'
 
 2019-04-10  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): add argument
-	'SendUsingAccount'
+        * R/sendmail.R (sendmail): add argument
+        'SendUsingAccount'
 
 2019-03-27  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): add argument 'html'
+        * R/sendmail.R (sendmail): add argument 'html'
 
 2019-02-13  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): 0.1-6
+        * DESCRIPTION (Version): 0.1-6
 
-	* R/sendmail.R (sendmail): quote email
-	addresses, so that expressions like
-	"name <name@server.net>" can be used
+        * R/sendmail.R (sendmail): quote email
+        addresses, so that expressions like
+        "name <name@server.net>" can be used
 
 2018-02-27  Enrico Schumann  <es@enricoschumann.net>
 
-	* NAMESPACE: export msgID
+        * NAMESPACE: export msgID
 
 2017-09-01  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): new method
-	'outlook', which uses PowerShell to send
-	messages via a running instance of Outlook
+        * R/sendmail.R (sendmail): new method
+        'outlook', which uses PowerShell to send
+        messages via a running instance of Outlook
 
 2016-04-21  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): if 'length(body) > 1',
-	then all elements of the character vector are
-	pasted ('collapsed') into a length one vector,
-	separated by '\n'
+        * R/sendmail.R (sendmail): if 'length(body) > 1',
+        then all elements of the character vector are
+        pasted ('collapsed') into a length one vector,
+        separated by '\n'
 
 2016-04-08  Enrico Schumann  <es@enricoschumann.net>
 
         * DESCRIPTION (Version): 0.1-5
 
-	* R/sendmail.R (sendmail): if 'to', 'cc' and 'bcc'
-	are character vectors of length > 1, they are now
-	properly collapsed
+        * R/sendmail.R (sendmail): if 'to', 'cc' and 'bcc'
+        are character vectors of length > 1, they are now
+        properly collapsed
 
 2016-02-05  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): Version: 0.1-4
+        * DESCRIPTION (Version): Version: 0.1-4
 
-	* R/saveAttachment.R (saveAttachment): fixed -- with
-	part boundaries very close together (e.g. empty body
-	+ attachment), the function sometimes chose the
-	wrong 'Content-Transfer-Encoding', in which case it
-	would not base64-decode
+        * R/saveAttachment.R (saveAttachment): fixed -- with
+        part boundaries very close together (e.g. empty body
+        + attachment), the function sometimes chose the
+        wrong 'Content-Transfer-Encoding', in which case it
+        would not base64-decode
 
 2014-10-01  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): Version: 0.1-3
-	(Imports): base64enc (no more Depends)
+        * DESCRIPTION (Version): Version: 0.1-3
+        (Imports): base64enc (no more Depends)
 
-	* R/sendmail.R (sendmail): quote username to allow
-	special characters
+        * R/sendmail.R (sendmail): quote username to allow
+        special characters
 
 2013-11-01  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): Version: 0.1-2
+        * DESCRIPTION (Version): Version: 0.1-2
 
-	* small correction in docs
+        * small correction in docs
 
 2013-08-05  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): Version: 0.1-1
+        * DESCRIPTION (Version): Version: 0.1-1
 
-	* R/sendmail.R (sendmail): added header argument
-
-2013-07-31  Enrico Schumann  <es@enricoschumann.net>
-
-	* R/sendmail.R (sendmail): added -- currently only
-	with 'sendemail' support
+        * R/sendmail.R (sendmail): added header argument
 
 2013-07-31  Enrico Schumann  <es@enricoschumann.net>
 
-	* DESCRIPTION (Version): Version: 0.1-0
+        * R/sendmail.R (sendmail): added -- currently only
+        with 'sendemail' support
 
-	* R/saveAttachment.R (saveAttachment): initial version
+2013-07-31  Enrico Schumann  <es@enricoschumann.net>
+
+        * DESCRIPTION (Version): Version: 0.1-0
+
+        * R/saveAttachment.R (saveAttachment): initial version
 

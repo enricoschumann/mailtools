@@ -54,7 +54,7 @@ sendmail <- function(subject,
         if (!is.null(bcc))
             bcc <- paste0(shQuote(bcc), collapse = ",")
         if (!is.null(replyto))
-            bcc <- paste0(shQuote(replyto), collapse = ",")
+            replyto <- paste0(shQuote(replyto), collapse = ",")
 
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",
@@ -104,7 +104,7 @@ sendmail <- function(subject,
         if (!is.null(bcc))
             bcc <- paste0(bcc, collapse = ";")
         if (!is.null(replyto))
-            bcc <- paste0(replyto, collapse = ";")
+            replyto <- paste0(replyto, collapse = ";")
 
         cmd <- c("$o = New-Object -com Outlook.Application",
                  "$mail = $o.CreateItem(0)")
