@@ -7,6 +7,12 @@ v0.1-7  (????-??-??; not yet released)
     https://github.com/enricoschumann/mailtools/issues/2 ;
     thanks to 'TobiSonne' for raising these issues)
 
+  o sendmail: if 'body.file' is specified for method
+    "outlook", the file is now read via PowerShell's
+    'Get-Content'. Before, long message bodies would
+    raise an error because of a character limitation of
+    PowerShell's command length.
+
 v0.1-6  (2019-02-13)
 
   o sendmail: email addresses are now quoted, which

@@ -25,13 +25,11 @@ sendmail <- function(subject,
     old <- options(useFancyQuotes = FALSE)
     on.exit(options(old))
 
-    if (!is.null(body.file))
+    if (!is.null(body.file) && (is.null(method) || method != "outlook"))
         body <- paste(readLines(body.file, encoding = encoding),
                       collapse = "\n")
 
-    if (is.null(body))
-        body <- "\n"
-    else if (length(body) > 1L) {
+    if (!missing(body) && length(body) > 1L) {
         body <- paste0(body, collapse = "\n")
     }
 
@@ -127,12 +125,16 @@ sendmail <- function(subject,
                        else
                            stop("cannot find attachment ", sQuote(a))
         }
+
+        if (!is.null(body.file)) {
+            body <- paste("Get-Content -Path", sQuote(normalizePath(body.file)), "-Raw")
+        } else
+            body <- dQuote(body)
+
         cmd <- c(cmd,
-                 paste(if (html) "$mail.HTMLBody =" else "$mail.Body =",
-                       dQuote(body)))
-        if (!html) {
+                 paste(if (html) "$mail.HTMLBody =" else "$mail.Body =", body))
+        if (!html)
             cmd <- c(cmd, "$mail.BodyFormat = 2")
-        }
 
         if (!missing(SendUsingAccount)) {
                 l1 <- paste0("$acc = $o.Session.Accounts | ",
