@@ -63,7 +63,8 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
     character. Name of file.
 }
   \item{headers}{
-    a character vector of header lines
+    a character vector of header lines (i.e. for more than one
+    header use \code{c(....)})
 }
   \item{wait}{
     logical

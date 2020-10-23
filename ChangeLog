@@ -1,9 +1,13 @@
+2020-10-23  Enrico Schumann  <es@enricoschumann.net>
+
+        * man/sendmail.Rd: improve docs
+
 2020-08-26  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/sendmail.R (sendmail): if 'body.file' is
-	specified for method "outlook", read the file
-	via PowerShell's 'Get-Content'. Otherwise, long
-	message bodies would raise an error.
+        * R/sendmail.R (sendmail): if 'body.file' is
+        specified for method "outlook", read the file
+        via PowerShell's 'Get-Content'. Otherwise, long
+        message bodies would raise an error.
 
 2020-03-22  Enrico Schumann  <es@enricoschumann.net>
 
