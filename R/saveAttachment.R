@@ -68,3 +68,41 @@ saveAttachment <- function(pattern, fname, writeIfExists = TRUE, adjustfn = TRUE
     }
     atts
 }
+
+save_msg_attachments <- function(msg.path = ".", pdf.path = ".") {
+
+    if (as.numeric(R.Version()$major) < 4)
+        stop("function requires R version >= 4.0.0")
+    scr <- r"(
+$msgpath = "mmmm"
+$pdfpath = "pppp"
+Add-Type -assembly "Microsoft.Office.Interop.Outlook"
+Add-Type -assembly "System.Runtime.Interopservices"
+try {
+    $outlook = [Runtime.Interopservices.Marshal]::GetActiveObject('Outlook.Application')
+}
+catch {
+    try {
+        $outlook = New-Object -comobject Outlook.Application
+    }
+    catch {
+        Write-Host "Outlook still open?"
+        exit
+    }
+}
+
+Get-ChildItem $msgpath -Filter *.msg |
+    ForEach-Object {
+        $msg = $outlook.Session.OpenSharedItem($_.FullName)
+        $msg.Attachments |
+            ForEach-Object {
+                write-host $_.SaveAsFile($pdfpath + "\" + $_.FileName)
+            }
+    }
+)"
+    scr <- sub("mmmm", normalizePath(msg.path, winslash = "/"), scr, fixed = TRUE)
+    scr <- sub("pppp", normalizePath(pdf.path, winslash = "/"), scr, fixed = TRUE)
+    d <- tempdir()
+    writeLines(scr, file.path(d, "run.ps1"))
+    system(paste("powershell", file.path(d, "run.ps1")))
+}

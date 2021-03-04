@@ -1,4 +1,5 @@
 export("saveAttachment",
+       "save_msg_attachments",
        "sendmail",
        "msgID")
 
