@@ -118,10 +118,13 @@ sendmail <- function(subject,
             cmd <- c(cmd,
                      paste("$mail.bcc =", sQuote(bcc)))
         if (!is.null(attach)) {
+            ## on Windows, a filename must not contain
+            ## double-quotes, so doublequote filenames
             for (a in attach)
                 cmd <- if (file.exists(a))
                            c(cmd,
-                             paste0("$mail.attachments.add(", sQuote(normalizePath(a)),")"))
+                             paste0("$mail.attachments.add(",
+                                    dQuote(normalizePath(a)), ")"))
                        else
                            stop("cannot find attachment ", sQuote(a))
         }

@@ -1,6 +1,14 @@
+2021-12-22  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/sendmail.R (sendmail): for method "outlook",
+        use double quotes instead of single quotes for
+        filenames of attachments (on Windows, a filename
+        may contain single quotes but must not contain
+        double quotes)
+
 2021-03-04  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/saveAttachment.R (save_msg_attachments): add function
+        * R/saveAttachment.R (save_msg_attachments): add function
 
 2020-10-23  Enrico Schumann  <es@enricoschumann.net>
 
