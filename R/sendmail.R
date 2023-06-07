@@ -20,11 +20,13 @@ sendmail <- function(subject,
                      method = NULL,
                      display.only = FALSE,
                      html = FALSE,
+                     tls = NULL,
                      SendUsingAccount) {
 
     old <- options(useFancyQuotes = FALSE)
     on.exit(options(old))
 
+    method <- tolower(method)
     if (!is.null(body.file) && (is.null(method) || method != "outlook"))
         body <- paste(readLines(body.file, encoding = encoding),
                       collapse = "\n")
@@ -54,6 +56,15 @@ sendmail <- function(subject,
         if (!is.null(replyto))
             replyto <- paste0(shQuote(replyto), collapse = ",")
 
+        if (!is.null(tls)) {
+            if (isTRUE(tls))
+                tls <- "-o tls=yes"
+            else if (isFALSE(tls)) {
+                tls <- "-o tls=no"
+            } else
+                stop(sQuote("tls"), " should be either TRUE or FALSE")
+        }
+
         str <- paste0("sendemail -f ", shQuote(from),
                       if (!is.null(to))  paste0(" -t ", to) else "",
                       if (!is.null(cc))  paste0(" -cc ", cc) else "",
@@ -65,13 +76,15 @@ sendmail <- function(subject,
                       " -xu ", shQuote(user),
                       " -xp ", shQuote(password),
                       " -s ", paste0(server, ":", port),
-                      " -o message-charset=utf-8")
+                      " -o message-charset=utf-8 ")
+        str <- paste(str, tls)
 
         if (!is.null(attach))
             str <- paste0(str, " -a ", paste(attach, collapse = " "))
         if (!is.null(headers))
             str <- paste(str, paste0(" -o message-header=", shQuote(headers), collapse= ""))
         system(str)
+
     } else if (method == "blat") {
         ## TODO check handling of multiple recipients
         str <- paste0("sendemail -f ", shQuote(from),

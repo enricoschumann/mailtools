@@ -1,3 +1,10 @@
+2023-06-07  Enrico Schumann  <es@enricoschumann.net>
+
+	* R/sendmail.R (sendmail): add argument "tls",
+	currently only used for method "sendemail". Can be
+	TRUE or FALSE (or NULL, for using the sendemail
+	default).
+
 2021-12-22  Enrico Schumann  <es@enricoschumann.net>
 
         * R/sendmail.R (sendmail): for method "outlook",

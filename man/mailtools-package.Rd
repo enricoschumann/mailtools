@@ -21,9 +21,9 @@ Enrico Schumann
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 
 }
-\references{
-to be added
-}
+%% \references{
+%% to be added
+%% }
 \keyword{ package }
 %% \seealso{
 %% to be added

@@ -13,7 +13,8 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
          attach = NULL, signature = NULL, signature.file = NULL,
          headers = NULL, wait = TRUE, logfile = NULL,
          encoding = "unknown", method = NULL,
-         display.only = FALSE, html = FALSE, SendUsingAccount)
+         display.only = FALSE, html = FALSE, tls = NULL,
+         SendUsingAccount)
 }
 \arguments{
   \item{subject}{
@@ -76,7 +77,9 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
     character
 }
   \item{method}{
-    the programme to be called.
+    the programme to be called.  Supported are sendemail,
+    blat and outlook. Method outlook is supported only on
+    Windows, where it also requires PowerShell.
 }
   \item{display.only}{
 
@@ -89,6 +92,13 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
     logical: send as HTML? For method \code{sendemail},
     if the message body begins with \code{<html>}, it
     is considered HTML.
+
+  }
+  \item{tls}{
+
+    \code{NULL} or length-one logical: use TLS? Only used
+    for method \code{sendemail}.  If \code{NULL},
+    \code{sendemail}'s default settings are used.
 
   }
   \item{SendUsingAccount}{
@@ -108,8 +118,8 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
   The function constructs an invocation of a
   command-line utility, specified by \code{method}, and
   then calls the specified method via
-  \code{system}. Currently supported are \code{sendemail} and
-  \code{Blat} (see References).
+  \code{system}. Currently supported are \code{sendemail},
+  \code{Blat} and \code{Outlook} (see References).
 
 }
 \value{
@@ -120,7 +130,6 @@ sendmail(subject, body, body.file = NULL, to = NULL, from,
 \references{
 
   \url{http://caspian.dotconf.net/menu/Software/SendEmail/}
-
   \url{https://www.blat.net/}
 
   \acronym{RFC} 2822: Internet Message Format.
