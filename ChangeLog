@@ -1,3 +1,11 @@
+2023-10-27  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/sendmail.R (sendmail): when method is
+        "outlook", the result of function 'sendmail' gains
+        an attribute "powershell.cmd" with the complete
+        code that is passed to PowerShell, which is useful
+        for debugging
+
 2023-06-08  Enrico Schumann  <es@enricoschumann.net>
 
         * DESCRIPTION (Version): 0.1-7

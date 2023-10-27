@@ -169,10 +169,11 @@ sendmail <- function(subject,
             cmd <- c(cmd, "$mail.Send()")
         ## cat(cmd, sep = "\n")
         cmd <- paste(cmd, collapse = ";")
-        invisible(system(paste("powershell -command ", shQuote(cmd)),
-                         intern = TRUE))
 
-
+        ans <- system(paste("powershell -command ",
+                            shQuote(cmd)), intern = TRUE)
+        attr(ans, "powershell.cmd") <- shQuote(cmd)
+        invisible(ans)
     } else
         stop("unknown method")
 }

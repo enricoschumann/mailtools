@@ -2,8 +2,8 @@ Package: mailtools
 Type: Package
 Title: E-Mail Utilities
 Description:  Utilities to handle email.
-Version: 0.1-7
-Date: 2023-06-08
+Version: 0.1-8
+Date: 2023-10-27
 Imports: base64enc
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 Authors@R: person(given = "Enrico", family = "Schumann",

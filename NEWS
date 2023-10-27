@@ -1,3 +1,12 @@
+v0.1-8  (2023-10-27; not yet released)
+
+  o when method is "outlook", the result of function
+    sendmail gains an attribute "powershell.cmd" with the
+    complete code that is passed to PowerShell, which is
+    useful for debugging
+
+  o ....
+
 v0.1-7  (2023-06-08)
 
   o sendmail: new arguments 'display.only', 'html' and
