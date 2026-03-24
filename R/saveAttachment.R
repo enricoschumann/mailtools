@@ -17,9 +17,9 @@ saveAttachment <- function(pattern, fname, writeIfExists = TRUE, adjustfn = TRUE
 
         message("Saving file ", atts[il])
 
-        lb <- 7L ## look back
+        lb <- 10L ## look back
         lf <- 10L ## look forward
-        checkLines <- (iline - lb):(iline + lf)
+        checkLines <- max(iline - lb, 0):(iline + lf)
         checkLines <- checkLines[checkLines < length(mbox) &
                                  checkLines > 0L]
         ## TODO: update lf and lb when at start or end of mbox file

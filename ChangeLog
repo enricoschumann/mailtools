@@ -1,3 +1,8 @@
+2026-03-24  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/saveAttachment.R (saveAttachment): increase
+        lookback to 10 lines
+
 2023-10-27  Enrico Schumann  <es@enricoschumann.net>
 
         * R/sendmail.R (sendmail): when method is
